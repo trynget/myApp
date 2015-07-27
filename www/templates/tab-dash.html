@@ -1,4 +1,9 @@
 <ion-view view-title="Dashboard">
+  <ion-nav-buttons side="right">
+      <button class="button" ng-click="account()">
+          登录|登出
+      </button>
+  </ion-nav-buttons>
   <ion-content class="padding">
     <div class="list card">
       <div class="item item-divider">Recent Updates</div>
@@ -26,3 +31,14 @@
     </div>
   </ion-content>
 </ion-view>
+<script id="account.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar-energized">
+            <h1 class="title">我的账户</h1>
+            <a class="button" ng-click="closeModal();">关闭</a>
+        </ion-header-bar>
+        <ion-content>
+            登录与登出
+        </ion-content>
+    </ion-modal-view>
+</script>

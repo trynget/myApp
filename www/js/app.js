@@ -54,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/chats',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
+          templateUrl: 'templates/tab-todo.html',
           controller: 'ChatsCtrl'
         }
       }
@@ -82,4 +82,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
+})
+
+.config(function($ionicConfigProvider){
+    $ionicConfigProvider.tabs.position("bottom");  //参数可以是：top | bottom
 });
