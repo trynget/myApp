@@ -1,34 +1,49 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="主页">
   <ion-nav-buttons side="right">
       <button class="button" ng-click="account()">
           登录|登出
       </button>
   </ion-nav-buttons>
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
+      <div class="scroll-content">
+          <div class="row">
+              <div class="col col-50  positive-bg light">
+                  <div>功能一</div>
+                  <i class="icon ion-plane"></i>
+              </div>
+              <div class="col col-25  assertive-bg light">
+                  <div>功能二</div>
+                  <i class="icon ion-android-train"></i>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col  calm-bg light">
+                  <div>功能三</div>
+                  <i class="icon ion-home"></i>
+              </div>
+              <div class="col stable-bg energized" >
+                  <i class="icon ion-person"></i>
+                  <div>功能四</div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col  balanced-bg light">
+                  <div>功能五</div>
+                  <i class="icon ion-image"></i>
+              </div>
+              <div class="col energized-bg light">
+                  <div>功能六</div>
+                  <i class="icon ion-pricetag"></i>
+              </div>
+              <div class="col  royal-bg light">
+                  <div>功能七</div>
+                  <i class="icon ion-person-stalker"></i>
+              </div>
+          </div>
+
       </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
   </ion-content>
 </ion-view>
 <script id="account.html" type="text/ng-template">
