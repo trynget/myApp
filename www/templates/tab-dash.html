@@ -5,21 +5,42 @@
       </button>
   </ion-nav-buttons>
   <ion-content>
-          <div style="height: 50%;">
-              <button class="button-full" ng-click="doSomething()">
-                  上半部菜单
-              </button>
-          </div>
-          <div class="row">
-              <div class="col">
-                  <div>功能一</div>
-                  <i class="icon ion-plane"></i>
+          <div class="row dark-bg" align="center">
+              <div class="col button button-clear"  ng-click="doSomething()">
+                  <i class="ion-grid myIcon"></i>
+                  <div>
+                      课表
+                  </div>
               </div>
-              <div class="col">
-                  <div>功能二</div>
-                  <i class="icon ion-android-train"></i>
+              <div class="col button button-clear" ng-click="doSomething()">
+                  <i class="ion-android-expand myIcon"></i>
+                  <div>
+                      扫码
+                  </div>
               </div>
           </div>
+
+      <div class="row" align="center">
+          <div class="col button"  ng-click="doSomething()">
+              <i class="ion-ios-compose myIcon"></i>
+              <div>
+                  笔记
+              </div>
+          </div>
+          <div class="col button"  ng-click="doSomething()">
+              <i class="ion-ios-alarm myIcon"></i>
+              <div>
+                  闹钟
+              </div>
+          </div>
+          <div class="col button"  ng-click="doSomething()">
+              <i class="ion-ios-pulse-strong myIcon"></i>
+              <div>
+                  通知
+              </div>
+          </div>
+      </div>
+
 
           <div class="row">
               <div class="col">

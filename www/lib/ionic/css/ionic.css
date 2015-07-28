@@ -6872,7 +6872,7 @@ progress {
   -webkit-transition: opacity 0.1s;
   transition: opacity 0.1s;
   padding: 0 6px;
-  max-height: 42px;
+  /*max-height: 42px;*/
   border-color: transparent;
   background: none;
   box-shadow: none; }
