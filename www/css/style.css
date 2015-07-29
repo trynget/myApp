@@ -1,3 +1,15 @@
 .myIcon {
     font-size: 40px;
 }
+
+.myRow {
+    padding: 0px;
+}
+
+.myButton {
+    border-radius: 0px;
+}
+
+.box {
+    height:200px;
+}

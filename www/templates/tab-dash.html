@@ -20,20 +20,20 @@
               </div>
           </div>
 
-      <div class="row" align="center">
-          <div class="col button"  ng-click="doSomething()">
+      <div class="row myRow" align="center">
+          <div class="col button myButton"  ng-click="doSomething()">
               <i class="ion-ios-compose myIcon"></i>
               <div>
                   笔记
               </div>
           </div>
-          <div class="col button"  ng-click="doSomething()">
+          <div class="col button myButton"  ng-click="doSomething()">
               <i class="ion-ios-alarm myIcon"></i>
               <div>
                   闹钟
               </div>
           </div>
-          <div class="col button"  ng-click="doSomething()">
+          <div class="col button myButton"  ng-click="doSomething1()">
               <i class="ion-ios-pulse-strong myIcon"></i>
               <div>
                   通知
@@ -41,36 +41,40 @@
           </div>
       </div>
 
-
-          <div class="row">
-              <div class="col">
-                  <div>功能三</div>
-                  <i class="icon ion-home"></i>
-              </div>
-              <div class="col" >
-                  <i class="icon ion-person"></i>
-                  <div>功能四</div>
-              </div>
-              <div class="col">
-                  <div>功能五</div>
-                  <i class="icon ion-android-train"></i>
+      <div class="row myRow" align="center">
+          <div class="col button myButton"  ng-click="doSomething()">
+              <i class="ion-ios-more myIcon"></i>
+              <div>
+                  待
               </div>
           </div>
-
-          <div class="row">
-              <div class="col">
-                  <div>功能六</div>
-                  <i class="icon ion-image"></i>
-              </div>
-              <div class="col">
-
-                  <i class="icon ion-pricetag"></i>
-              </div>
-              <div class="col">
-
-                  <i class="icon ion-person-stalker"></i>
+          <div class="col button myButton"  ng-click="doSomething()">
+              <i class="ion-ios-more myIcon"></i>
+              <div>
+                  拓
               </div>
           </div>
+          <div class="col button myButton"  ng-click="doSomething()">
+              <i class="ion-ios-more myIcon"></i>
+              <div>
+                  展
+              </div>
+          </div>
+      </div>
+
+      <div class="row myRow" align="center">
+          <ion-slide-box style="flex: 1;" does-continue="true" auto-play="true">
+              <ion-slide>
+                  <div class="box positive-bg"><h1>内容</h1></div>
+              </ion-slide>
+              <ion-slide>
+                  <div class="box energized-bg"><h1>推图</h1></div>
+              </ion-slide>
+              <ion-slide>
+                  <div class="box balanced-bg"><h1>推文</h1></div>
+              </ion-slide>
+          </ion-slide-box>
+      </div>
   </ion-content>
 </ion-view>
 <script id="account.html" type="text/ng-template">
@@ -83,4 +87,5 @@
             登录与登出
         </ion-content>
     </ion-modal-view>
+
 </script>
