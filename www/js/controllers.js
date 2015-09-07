@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
         });
     })
 
-.controller('TodoCtrl', function($scope, Chats) {
+.controller('TodoCtrl', function($scope, todoList) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -28,10 +28,18 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+  //$scope.chats = Chats.all();
+  //$scope.remove = function(chat) {
+  //  Chats.remove(chat);
+  //};
+        $scope.items = [];
+        $scope.init = function() {
+            todoList.getAllItems(function(data) {
+                console.log(data);
+                $scope.items = data;
+            })
+        };
+        $scope.init();
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

@@ -47,4 +47,33 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.service('todoList', function () {
+        var _db;
+
+        function dateFix(result) {
+            var data = [];
+            result.forEach(function (each) {
+                data.push(each.doc);
+            });
+            return data;
+        }
+
+        return {
+            initDB: function () {
+                _db = new PouchDB('todoList', {adapter: 'websql'});
+            },
+            getAllItems: function (callback) {
+                _db.allDocs({include_docs: true}).then(function (result) {
+                    callback(dateFix(result.rows));
+                })
+            },
+            addItem: function (item) {
+                _db.post(item);
+            },
+            removeItem: function (item) {
+                _db.remove(item);
+            }
+        }
 });
