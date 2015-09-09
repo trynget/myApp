@@ -1,10 +1,14 @@
 <ion-view view-title="待办事项">
   <ion-content>
+    <div class="item-input">
+        <input type="text" ng-model="newItem" placeholder="添加新的事务" style="border:1px solid black">
+        <div class="button button-clear" ng-click="postItem()">添加</div>
+    </div>
     <ion-list>
       <ion-item ng-repeat="item in items" type="item-text-wrap">
         <h2>{{item}}</h2>
 
-        <ion-option-button class="button-assertive" ng-click="todoList.removeItem(item)">
+        <ion-option-button class="button-assertive" ng-click="deleteItem()">
           完成
         </ion-option-button>
       </ion-item>
