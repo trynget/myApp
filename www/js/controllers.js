@@ -32,12 +32,12 @@ angular.module('starter.controllers', [])
   //$scope.remove = function(chat) {
   //  Chats.remove(chat);
   //};
-        $scope.items = [];
+        //$scope.items = [];
         $scope.init = function() {
-            todoList.getAllItems(function(data) {
+            todoList.getAllItems().then(function(data) {
                 console.log(data);
                 $scope.items = data;
-            })
+            });
         };
         $scope.init();
 

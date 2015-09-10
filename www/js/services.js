@@ -49,31 +49,80 @@ angular.module('starter.services', [])
   };
 })
 
-.service('todoList', function () {
+.service('todoList', function ($q) {
         var _db;
+        var _data;
 
-        function dateFix(result) {
-            var data = [];
-            result.forEach(function (each) {
-                data.push(each.doc);
-            });
-            return data;
+        //function dateFix(result) {
+        //    var _data = [];
+        //    result.forEach(function (each) {
+        //        _data.push(each.doc);
+        //    });
+        //    _db.changes({ live: true, since: 'now', include_docs: true})
+        //        .on('change', onDatabaseChange);
+        //    return _data;
+        //}
+
+        function onDatabaseChange(change) {
+            var index = findIndex(_data, change.id);
+            var data = _data[index];
+
+            if (change.deleted) {
+                if (data) {
+                    _data.splice(index, 1); // delete
+                }
+            } else {
+                if (data && data._id === change.id) {
+                    _data[index] = change.doc; // update
+                } else {
+                    _data.splice(index, 0, change.doc); // insert
+                }
+            }
+        }
+
+        function findIndex(array, id) {
+            var low = 0, high = array.length, mid;
+            while (low < high) {
+                mid = (low + high) >>> 1;
+                array[mid]._id < id ? low = mid + 1 : high = mid
+            }
+            return low;
         }
 
         return {
             initDB: function () {
                 _db = new PouchDB('todoList', {adapter: 'websql'});
             },
-            getAllItems: function (callback) {
-                _db.allDocs({include_docs: true}).then(function (result) {
-                    callback(dateFix(result.rows));
-                })
+            getAllItems: function () {
+                if (!_data) {
+                    return $q.when(_db.allDocs({ include_docs: true}))
+                        .then(function(docs) {
+
+                            // Each row has a .doc object and we just want to send an
+                            // array of birthday objects back to the calling controller,
+                            // so let's map the array to contain just the .doc objects.
+                            _data = docs.rows.map(function(row) {
+                                // Dates are not automatically converted from a string.
+                                row.doc.Date = new Date(row.doc.Date);
+                                return row.doc;
+                            });
+
+                            // Listen for changes on the database.
+                            _db.changes({ live: true, since: 'now', include_docs: true})
+                                .on('change', onDatabaseChange);
+
+                            return _data;
+                        });
+                } else {
+                    // Return cached data as a promise
+                    return $q.when(_data);
+                }
             },
             addItem: function (item) {
-                _db.post(item);
+                return $q.when(_db.post(item));
             },
             removeItem: function (item) {
-                _db.remove(item);
+                return $q.when(_db.remove(item));
             }
         }
 });
