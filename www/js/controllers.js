@@ -32,7 +32,7 @@ angular.module('starter.controllers', [])
   //$scope.remove = function(chat) {
   //  Chats.remove(chat);
   //};
-        //$scope.items = [];
+        $scope.items = [];
         $scope.init = function() {
             todoList.getAllItems(function(data) {
                 console.log(data);
@@ -41,20 +41,19 @@ angular.module('starter.controllers', [])
         };
         $scope.init();
 
-        $scope.newItem = "www";
+        $scope.newItem = {};
         $scope.postItem = function() {
             console.log($scope.newItem);
-            if($scope.newItem == ""){
+            if(!$scope.newItem.content){
                 alert("请先输入事务");
                 return;
             }
             todoList.addItem($scope.newItem);
-            $scope.newItem = "";
-            $scope.init();
+            $scope.newItem = {};
         };
-        $scope.deleteItem = function() {
+        $scope.deleteItem = function(item) {
+            $scope.item = item;
             todoList.removeItem($scope.item);
-            $scope.init();
         }
 })
 
