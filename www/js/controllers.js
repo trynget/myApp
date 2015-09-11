@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
         });
     })
 
-.controller('TodoCtrl', function($scope, todoList) {
+.controller('TodoCtrl', function($scope, $ionicModal, todoList) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -28,33 +28,64 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  //$scope.chats = Chats.all();
-  //$scope.remove = function(chat) {
-  //  Chats.remove(chat);
-  //};
-        //$scope.items = [];
-        $scope.init = function() {
+        todoList.getAllItems().then(function(data) {
+            $scope.items = data;
+        });
+
+        $ionicModal.fromTemplateUrl('add-or-edit-item.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.showAddItemModal = function() {
+            $scope.newItem = {};
+            $scope.action = '添加';
+            $scope.isAdd = true;
+            $scope.modal.show();
+        };
+
+        $scope.showEditItemModal = function(item) {
+            $scope.newItem = item;
+            $scope.action = '编辑';
+            $scope.isAdd = false;
+            $scope.modal.show();
+        };
+
+        $scope.saveItem = function() {
+            if ($scope.isAdd) {
+                if(!$scope.newItem.content){
+                    alert("请先输入事务");
+                    return;
+                }
+                todoList.addItem($scope.newItem);
+                $scope.newItem = {};
+            } else {
+                if(!$scope.newItem.content){
+                    alert("请先输入事务");
+                    return;
+                }
+                todoList.updateItem($scope.newItem);
+                $scope.newItem = {};
+            }
+            $scope.modal.hide();
+        };
+
+        $scope.deleteItem = function() {
+            todoList.removeItem($scope.newItem);
+            $scope.modal.hide();
+        };
+
+        $scope.cancleItem = function() {
             todoList.getAllItems().then(function(data) {
-                console.log(data);
                 $scope.items = data;
             });
+            $scope.modal.hide();
         };
-        $scope.init();
 
-        $scope.newItem = {};
-        $scope.postItem = function() {
-            console.log($scope.newItem);
-            if(!$scope.newItem.content){
-                alert("请先输入事务");
-                return;
-            }
-            todoList.addItem($scope.newItem);
-            $scope.newItem = {};
-        };
-        $scope.deleteItem = function(item) {
-            $scope.item = item;
-            todoList.removeItem($scope.item);
-        }
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

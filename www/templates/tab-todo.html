@@ -1,17 +1,36 @@
 <ion-view view-title="待办事项">
-  <ion-content>
-    <div class="item-input">
-        <input type="text" ng-model="newItem.content" placeholder="添加新的事务" style="border:1px solid black">
-        <div class="button button-clear" ng-click="postItem()" style="color: #007aff">添加</div>
-    </div>
-    <ion-list>
-      <ion-item ng-repeat="item in items" type="item-text-wrap">
-        <h2>{{item.content}}</h2>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-add" ng-click="showAddItemModal()">
 
-        <ion-option-button class="button-assertive" ng-click="deleteItem(item)">
-          完成
-        </ion-option-button>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="item in items track by $index" type="item-text-wrap" ng-click="showEditItemModal(item)">
+        <h2>{{item.content}}</h2>
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
+
+<script id="add-or-edit-item.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">{{ action }}事务</h1>
+            <div class="buttons">
+                <button ng-hide="isAdd" ng-click="deleteItem()" class="button button-icon icon ion-trash-a"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" placeholder="请输入事务" ng-model="newItem.content">
+                </label>
+            </div>
+            <div class="padding">
+                <button ng-click="saveItem()" class="button button-block button-positive activated">确定</button>
+                <button ng-click="cancleItem()" class="button button-block button-positive activated">取消</button>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>
