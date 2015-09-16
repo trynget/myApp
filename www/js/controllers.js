@@ -47,6 +47,7 @@ angular.module('starter.controllers', [])
 
         $scope.showEditItemModal = function(item) {
             $scope.newItem = item;
+            $scope.rawContent = item.content;
             $scope.action = '编辑';
             $scope.isAdd = false;
             $scope.modal.show();
@@ -77,9 +78,7 @@ angular.module('starter.controllers', [])
         };
 
         $scope.cancleItem = function() {
-            todoList.getAllItems().then(function(data) {
-                $scope.items = data;
-            });
+            $scope.newItem.content = $scope.rawContent;
             $scope.modal.hide();
         };
 

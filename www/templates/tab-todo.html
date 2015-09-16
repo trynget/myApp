@@ -24,12 +24,13 @@
         <ion-content>
             <div class="list list-inset">
                 <label class="item item-input">
-                    <input type="text" placeholder="请输入事务" ng-model="newItem.content">
+                    <input type="text" placeholder="请输入事务"  ng-model="newItem.content">
                 </label>
             </div>
             <div class="padding">
                 <button ng-click="saveItem()" class="button button-block button-positive activated">确定</button>
                 <button ng-click="cancleItem()" class="button button-block button-positive activated">取消</button>
+                <button ng-hide="true" ng-model="rawContent"></button>
             </div>
         </ion-content>
     </ion-modal-view>
