@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicModal) {
+.controller('DashCtrl', function($scope, $ionicModal, $state) {
         $ionicModal.fromTemplateUrl("account.html", {
             scope: $scope,
             animation: "slide-in-up"
@@ -17,6 +17,10 @@ angular.module('starter.controllers', [])
         $scope.$on("$destroy", function() {
             $scope.modal.remove();
         });
+
+        $scope.showInforms = function() {
+            $state.go('tab.dash-inform');
+        };
     })
 
 .controller('TodoCtrl', function($scope, $ionicModal, todoList) {
@@ -86,8 +90,14 @@ angular.module('starter.controllers', [])
             $scope.modal.remove();
         });
 })
+    .controller('InformCtrl', function($scope, Chats) {
+        $scope.chats = Chats.all();
+        $scope.remove = function(chat) {
+            Chats.remove(chat);
+        };
+    })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('InformDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 

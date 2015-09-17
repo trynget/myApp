@@ -50,6 +50,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
+      .state('tab.dash-inform', {
+          url: '/dash/inform',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/inform.html',
+                  controller: 'InformCtrl'
+              }
+          }
+      })
+      .state('tab.inform-detail', {
+          url: '/dash/inform/:chatId',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/inform-detail.html',
+                  controller: 'InformDetailCtrl'
+              }
+          }
+      })
 
   .state('tab.todo', {
       url: '/todo',
@@ -57,15 +75,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         'tab-todo': {
           templateUrl: 'templates/tab-todo.html',
           controller: 'TodoCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/todo/:chatId',
-      views: {
-        'tab-todo': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
         }
       }
     })
