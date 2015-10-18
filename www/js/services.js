@@ -1,9 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
-
-  // Some fake testing data
+.factory('Chats', function($http) {
   var chats = [{
     id: 0,
     name: 'Ben Sparrow',
@@ -25,6 +22,15 @@ angular.module('starter.services', [])
     name: 'Mike Harrington',
     lastText: 'This is wicked good ice cream.'
   }];
+  //var infoUrl = "http://localhost/istudy1.0/index.php/pushNotifications?callback=JSON_CALLBACK";
+  //var chats;
+  //$http.jsonp(infoUrl).
+  //    success(function(res){
+  //    console.log(res);
+  //    chats = res.msg;
+  //}).error(function() {
+  //        console.log('error');
+  //    });
 
   return {
     all: function() {
