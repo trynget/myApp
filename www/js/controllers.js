@@ -21,6 +21,11 @@ angular.module('starter.controllers', [])
         $scope.showInforms = function() {
             $state.go('tab.dash-inform');
         };
+
+        /*** 到课表页**/
+        $scope.toSchedule = function() {
+            $state.go('schedule');
+        }
     })
 
 .controller('TodoCtrl', function($scope, $ionicModal, todoList) {
@@ -105,4 +110,43 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
+})
+
+.controller('ScheduleCtrl',function($scope) {
+    $scope.items = [{
+        content: "15-16学年1201班级课表" ,
+        scheduleImg: "img/surfing.jpg"
+    },{
+        content: "15-16学年1203班级课表",
+        scheduleImg: "img/surfing.jpg"
+    }];
+    $scope.showSchedule = function(index) {
+        var pswpElement = document.querySelectorAll('.pswp')[0];
+        // build items array
+        var itemImgs = $scope.items[index].scheduleImg;
+        var items = [], item;
+        setTimeout(function(){
+            item = {
+                src : itemImgs,
+                w : 1000,
+                h : 664
+            };
+            items.push(item);
+            // define options (if needed)
+            var options = {
+                history: false,
+                focus: false,
+                tapToClose: true,
+                preload: [1,1],
+                showAnimationDuration: 0,
+                hideAnimationDuration: 0
+            };
+            var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+            gallery.init();
+        },300);
+    };
+
+    $scope.toDash = function() {
+        history.back();
+    }
 });

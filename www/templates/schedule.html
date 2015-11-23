@@ -1,0 +1,14 @@
+<ion-view view-title="课表">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-ios-close-empty" ng-click="toDash()">
+
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="item in items track by $index" type="item-text-wrap" ng-click="showSchedule($index)">
+                <h2>{{item.content}}</h2>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -87,7 +87,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+      .state('schedule', {
+          url: '/dash/schedule',
+          templateUrl: 'templates/schedule.html',
+          controller: 'ScheduleCtrl'
+      });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
