@@ -7,7 +7,8 @@
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="item in items track by $index" type="item-text-wrap" ng-click="showSchedule($index)">
-                <h2>{{item.content}}</h2>
+                <h2>{{item.title}}</h2>
+                <p>{{item.content}}</p>
             </ion-item>
         </ion-list>
     </ion-content>
