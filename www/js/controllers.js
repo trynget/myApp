@@ -25,10 +25,14 @@ angular.module('starter.controllers', [])
         /*** 到课表页**/
         $scope.toSchedule = function() {
             $state.go('schedule');
-        }
+        };
+        /*** 到笔记页**/
+        $scope.toNote = function() {
+            $state.go('tab.dash-note');
+        };
     })
 
-.controller('TodoCtrl', function($scope, $ionicModal, todoList) {
+.controller('TodoCtrl', function($scope, $ionicModal, showMsgService, todoList) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -65,14 +69,14 @@ angular.module('starter.controllers', [])
         $scope.saveItem = function() {
             if ($scope.isAdd) {
                 if(!$scope.newItem.content){
-                    alert("请先输入事务");
+                    showMsgService.showMsg("请先输入事务");
                     return;
                 }
                 todoList.addItem($scope.newItem);
                 $scope.newItem = {};
             } else {
                 if(!$scope.newItem.content){
-                    alert("请先输入事务");
+                    showMsgService.showMsg("请先输入事务");
                     return;
                 }
                 todoList.updateItem($scope.newItem);
@@ -149,4 +153,65 @@ angular.module('starter.controllers', [])
     $scope.toDash = function() {
         history.back();
     }
+})
+.controller('NoteCtrl',function($scope, $ionicModal, showMsgService, noteList) {
+    noteList.getAllItems().then(function(data) {
+        $scope.notes = data;
+    });
+
+    $ionicModal.fromTemplateUrl('add-or-edit-note.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+    $scope.showAddItemModal = function() {
+        $scope.newItem = {};
+        $scope.action = '添加';
+        $scope.isAdd = true;
+        $scope.modal.show();
+    };
+
+    $scope.showEditItemModal = function(item) {
+        $scope.newItem = item;
+        $scope.rawTitle = item.title;
+        $scope.rawContent = item.content;
+        $scope.action = '编辑';
+        $scope.isAdd = false;
+        $scope.modal.show();
+    };
+
+    $scope.saveItem = function() {
+        if ($scope.isAdd) {
+            if(!$scope.newItem.content || !$scope.newItem.title){
+                showMsgService.showMsg("标题和内容不能为空");
+                return;
+            }
+            noteList.addItem($scope.newItem);
+            $scope.newItem = {};
+        } else {
+            if(!$scope.newItem.content || !$scope.newItem.title){
+                showMsgService.showMsg("标题和内容不能为空");
+                return;
+            }
+            noteList.updateItem($scope.newItem);
+            $scope.newItem = {};
+        }
+        $scope.modal.hide();
+    };
+
+    $scope.deleteItem = function() {
+        noteList.removeItem($scope.newItem);
+        $scope.modal.hide();
+    };
+
+    $scope.cancleItem = function() {
+        $scope.newItem.title = $scope.rawTitle;
+        $scope.newItem.content = $scope.rawContent;
+        $scope.modal.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
 });

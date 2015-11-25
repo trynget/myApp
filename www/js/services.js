@@ -113,4 +113,77 @@ angular.module('starter.services', [])
             }
             return low;
         }
-});
+})
+
+    .service('noteList', function ($q) {
+        var _db;
+        var _data;
+
+        return {
+            initDB: function () {
+                _db = new PouchDB('noteList', {adapter: 'websql'});
+            },
+            getAllItems: function () {
+                return $q.when(_db.allDocs({ include_docs: true}))
+                    .then(function(docs) {
+                        _data = docs.rows.map(function(row) {
+                            // Dates are not automatically converted from a string.
+                            row.doc.Date = new Date(row.doc.Date);
+                            return row.doc;
+                        });
+                        // Listen for changes on the database.
+                        _db.changes({ live: true, since: 'now', include_docs: true})
+                            .on('change', onDatabaseChange);
+                        return _data;
+                    });
+            },
+            addItem: function (item) {
+                return $q.when(_db.post(item));
+            },
+            updateItem: function(item) {
+                return $q.when(_db.put(item));
+            },
+            removeItem: function (item) {
+                return $q.when(_db.remove(item));
+            }
+        };
+        function onDatabaseChange(change) {
+            var index = findIndex(_data, change.id);
+            var data = _data[index];
+
+            if (change.deleted) {
+                if (data) {
+                    _data.splice(index, 1); // delete
+                }
+            } else {
+                if (data && data._id === change.id) {
+                    _data[index] = change.doc; // update
+                } else {
+                    _data.splice(index, 0, change.doc); // insert
+                }
+            }
+        }
+        function findIndex(array, id) {
+            var low = 0, high = array.length, mid;
+            while (low < high) {
+                mid = (low + high) >>> 1;
+                array[mid]._id < id ? low = mid + 1 : high = mid
+            }
+            return low;
+        }
+    })
+
+.service('showMsgService',["$ionicLoading", function ($ionicLoading) {
+    /**
+     * 弹框提示
+     * @param msg 提示信息
+     */
+    this.showMsg = function (msg) {
+        $ionicLoading.show({
+            template: '<span style="color: white">' + msg + '</span>',
+            noBackdrop:true,
+            duration: 1500
+        });
+    }
+
+}]);

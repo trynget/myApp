@@ -1,15 +1,47 @@
 <ion-view view-title="笔记">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-android-add" ng-click="showAddItemModal()">
+
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="note in notes" type="item-text-wrap" href="#/tab/dash/inform/{{chat.id}}">
-                <h2>{{chat.name}}</h2>
-                <p>{{chat.lastText}}</p>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="note in notes" type="item-text-wrap" ng-click="showEditItemModal(note)">
+                <h2>{{note.title}}</h2>
+                <p>{{note.content}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
-                <ion-option-button class="button-assertive" ng-click="remove(note)">
-                    Delete
+                <ion-option-button class="button-assertive" ng-click="deleteItem()">
+                    删除
                 </ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
+
+<script id="add-or-edit-note.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar>
+            <h1 class="title">{{ action }}笔记</h1>
+            <div class="buttons">
+                <button ng-hide="isAdd" ng-click="deleteItem()" class="button button-icon icon ion-trash-a"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" placeholder="标题"  ng-model="newItem.title">
+                </label>
+            </div>
+            <div class="list list-inset" style="height: 400px;" >
+                <textarea ng-model="newItem.content" class="writeText" placeholder="记录些什么呢？"></textarea>
+            </div>
+            <div class="padding">
+                <button ng-click="saveItem()" class="button button-block button-positive activated">确定</button>
+                <button ng-click="cancleItem()" class="button button-block button-positive activated">取消</button>
+                <button ng-hide="true" ng-model="rawTitle"></button>
+                <button ng-hide="true" ng-model="rawContent"></button>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>

@@ -7,9 +7,10 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform,todoList) {
+.run(function($ionicPlatform,todoList,noteList) {
   $ionicPlatform.ready(function() {
       todoList.initDB();
+      noteList.initDB();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -92,6 +93,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           url: '/dash/schedule',
           templateUrl: 'templates/schedule.html',
           controller: 'ScheduleCtrl'
+      })
+
+      .state('tab.dash-note', {
+          url: '/dash/note',
+          views:{
+              'tab-dash': {
+                  templateUrl: 'templates/note.html',
+                  controller: 'NoteCtrl'
+              }
+          }
       });
 
   // if none of the above states are matched, use this as the fallback
