@@ -1,14 +1,13 @@
 <ion-view view-title="分享">
-    <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-ios-close-empty" ng-click="toDash()">
-
-        </button>
-    </ion-nav-buttons>
+    <!--<ion-nav-buttons side="right">-->
+        <!--<button class="button button-icon icon ion-ios-close-empty" ng-click="toDash()">-->
+        <!--</button>-->
+    <!--</ion-nav-buttons>-->
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="item in items track by $index" type="item-text-wrap" ng-click="showSchedule($index)">
-                <h2>{{item.title}}</h2>
-                <p>{{item.content}}</p>
+            <ion-item ng-repeat="share in shares track by $index" type="item-text-wrap" href="#/tab/dash/share/{{$index}}">
+                <h2>{{share.title}}</h2>
+                <p>{{share.content}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

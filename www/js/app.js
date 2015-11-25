@@ -95,6 +95,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'ScheduleCtrl'
       })
 
+      .state('tab.dash-share', {
+          url: '/dash/share',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/share.html',
+                  controller: 'ShareCtrl'
+              }
+          }
+      })
+      .state('tab.share-detail', {
+          url: '/dash/share/:shareId',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/share-detail.html',
+                  controller: 'ShareDetailCtrl'
+              }
+          }
+      })
+
       .state('tab.dash-note', {
           url: '/dash/note',
           views:{

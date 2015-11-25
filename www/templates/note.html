@@ -6,13 +6,13 @@
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="note in notes" type="item-text-wrap" ng-click="showEditItemModal(note)">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="note in notes track by $index" type="item-text-wrap" ng-click="showEditItemModal(note)">
                 <h2>{{note.title}}</h2>
                 <p>{{note.content}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
 
-                <ion-option-button class="button-assertive" ng-click="deleteItem()">
-                    删除
+                <ion-option-button class="button-assertive" ng-click="shareNote(note)">
+                    分享
                 </ion-option-button>
             </ion-item>
         </ion-list>
