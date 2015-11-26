@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicModal, $state) {
+.controller('DashCtrl', function($scope, $ionicModal, $state, $rootScope) {
         $ionicModal.fromTemplateUrl("account.html", {
             scope: $scope,
             animation: "slide-in-up"
@@ -21,6 +21,13 @@ angular.module('starter.controllers', [])
         $scope.showInforms = function() {
             $state.go('tab.dash-inform');
         };
+        $rootScope.shares = [{
+            title: "来分享吧",
+            content: "这里汇集了大家分享的有趣的东西，也欢迎你来贡献力量。"
+        },{
+            title: "习近平将赴法国出席气候变化巴黎大会",
+            content: "新华社北京11月25日电　外交部发言人陆慷25日宣布，应法兰西共和国总统奥朗德和气候变化巴黎大会主席法比尤斯邀请，国家主席习近平将于11月29日至11月30日赴法国出席气候变化巴黎大会开幕活动。应津巴布韦共和国总统穆加贝邀请，国家主席习近平将于12月1日至2日对津巴布韦进行国事访问。应南非共和国总统祖马邀请，国家主席习近平将于12月2日至5日对南非进行国事访问，并赴约翰内斯堡主持中非合作论坛峰会。"
+        }];
 
         /*** 到课表页**/
         $scope.toSchedule = function() {
@@ -29,6 +36,10 @@ angular.module('starter.controllers', [])
         /*** 到笔记页**/
         $scope.toNote = function() {
             $state.go('tab.dash-note');
+        };
+        /*** 到分享页**/
+        $scope.toShare = function() {
+            $state.go('tab.dash-share');
         };
     })
 
@@ -155,13 +166,10 @@ angular.module('starter.controllers', [])
     }
 })
     .controller('ShareCtrl',function($scope, $rootScope) {
-        $rootScope.shares = [{
-            title: "来分享吧",
-            content: "这里汇集了大家分享的有趣的东西，也欢迎你来贡献力量。"
-        },{
-            title: "习近平将赴法国出席气候变化巴黎大会",
-            content: "新华社北京11月25日电　外交部发言人陆慷25日宣布，应法兰西共和国总统奥朗德和气候变化巴黎大会主席法比尤斯邀请，国家主席习近平将于11月29日至11月30日赴法国出席气候变化巴黎大会开幕活动。应津巴布韦共和国总统穆加贝邀请，国家主席习近平将于12月1日至2日对津巴布韦进行国事访问。应南非共和国总统祖马邀请，国家主席习近平将于12月2日至5日对南非进行国事访问，并赴约翰内斯堡主持中非合作论坛峰会。"
-        }];
+        console.log($rootScope.shares)
+    })
+    .controller('ShareDetailCtrl',function($scope, $stateParams,$rootScope) {
+        $scope.share = $rootScope.shares[$stateParams.shareId];
     })
 
 .controller('NoteCtrl',function($scope, $ionicModal, $rootScope, showMsgService, noteList) {
