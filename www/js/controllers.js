@@ -37,6 +37,10 @@ angular.module('starter.controllers', [])
         $scope.toNote = function() {
             $state.go('tab.dash-note');
         };
+        /*** 到日期计数页**/
+        $scope.toDateCounter = function() {
+            $state.go('tab.dash-dateCounter');
+        };
         /*** 到分享页**/
         $scope.toShare = function() {
             $state.go('tab.dash-share');
@@ -167,6 +171,9 @@ angular.module('starter.controllers', [])
 })
     .controller('ShareCtrl',function($scope, $rootScope) {
         console.log($rootScope.shares)
+    })
+    .controller('DateCounterCtrl',function($scope, $rootScope) {
+
     })
     .controller('ShareDetailCtrl',function($scope, $stateParams,$rootScope) {
         $scope.share = $rootScope.shares[$stateParams.shareId];
