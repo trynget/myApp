@@ -178,7 +178,7 @@ angular.module('starter.controllers', [])
     })
 
     //时间提醒控制器
-    .controller('DateCounterCtrl',function($scope, $rootScope, dateCounter) {
+    .controller('DateCounterCtrl',function($scope, $rootScope, $ionicModal, dateCounter, showMsgService) {
         $rootScope.datelist = dateCounter.all();
         function getDateDiff(theDate){
             var startTime = new Date(theDate);
@@ -190,6 +190,40 @@ angular.module('starter.controllers', [])
             data.remainDays = getDateDiff(data.date);
             console.log(data);
         });
+
+        $scope.remove = function(index) {
+            $rootScope.datelist.splice(index,1);
+            console.log(index);
+        };
+
+        $ionicModal.fromTemplateUrl('add-or-edit-date.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.showAddItemModal = function() {
+            $scope.newItem = {};
+            $scope.modal.show();
+        };
+        $scope.saveItem = function() {
+            if(!$scope.newItem.date || !$scope.newItem.title){
+                showMsgService.showMsg("标题和内容不能为空");
+                return;
+            }
+            $scope.newItem.remainDays = getDateDiff($scope.newItem.date);
+            $rootScope.datelist.push($scope.newItem);
+            $scope.newItem = {};
+            $scope.modal.hide();
+        };
+        $scope.cancleItem = function() {
+            $scope.newItem = {};
+            $scope.modal.hide();
+        };
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
+
 
     })
     //时间提醒详情控制器
