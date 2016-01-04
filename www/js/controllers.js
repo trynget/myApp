@@ -134,10 +134,10 @@ angular.module('starter.controllers', [])
 .controller('ScheduleCtrl',function($scope) {
     $scope.items = [{
         content: "15-16学年1201班级课表" ,
-        scheduleImg: "img/surfing.jpg"
+        scheduleImg: "img/1201.png"
     },{
-        content: "15-16学年1203班级课表",
-        scheduleImg: "img/surfing.jpg"
+        content: "复旦临八15-16学年第二学期课表",
+        scheduleImg: "img/fudan.PNG"
     }];
     $scope.showSchedule = function(index) {
         var pswpElement = document.querySelectorAll('.pswp')[0];
