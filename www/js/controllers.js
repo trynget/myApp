@@ -178,19 +178,23 @@ angular.module('starter.controllers', [])
     })
 
     //时间提醒控制器
-    .controller('DateCounterCtrl',function($scope, $rootScope,dateCounter) {
-        $scope.datelist = dateCounter.all();
+    .controller('DateCounterCtrl',function($scope, $rootScope, dateCounter) {
+        $rootScope.datelist = dateCounter.all();
         function getDateDiff(theDate){
             var startTime = new Date(theDate);
             var endTime = new Date();
             var days = (startTime - endTime)/(1000*60*60*24);
             return  Math.ceil(days);
         }
-        $scope.datelist.forEach(function(data){
+        $rootScope.datelist.forEach(function(data){
             data.remainDays = getDateDiff(data.date);
             console.log(data);
         });
 
+    })
+    .controller('DateCounterDetailCtrl',function($scope, $rootScope, $stateParams) {
+        $scope.dataDetail = $rootScope.datelist[$stateParams.dataId];
+        console.log($scope.dataDetail);
     })
 
     .controller('NoteCtrl',function($scope, $ionicModal, $rootScope, showMsgService, noteList) {

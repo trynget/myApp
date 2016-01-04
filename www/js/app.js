@@ -123,6 +123,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
               }
           }
       })
+      .state('tab.dash-dateCounter-detail',{
+          url: '/dash/dateCounter/:dataId',
+          views: {
+              'tab-dash': {
+                  templateUrl: 'templates/dateCounter-detail.html',
+                  controller: 'DateCounterDetailCtrl'
+              }
+          }
+      })
       .state('tab.dash-note', {
           url: '/dash/note',
           views:{

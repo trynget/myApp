@@ -1,7 +1,7 @@
 <ion-view view-title="时间提醒">
     <ion-content style="background-color: #f2f2f2">
         <ion-list>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="data in datelist track by $index" ng-if="data.remainDays>=0" type="item-text-wrap" href="" style="margin-bottom: 20px">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="data in datelist track by $index" ng-if="data.remainDays>=0" type="item-text-wrap" href="#/tab/dash/dateCounter/{{$index}}" style="margin-bottom: 20px">
                 <span style="float: left">距离{{data.title}}还有</span>
                 <span class="remainNum">{{data.remainDays}}</span>
                 <span class="remainDays">天</span>
@@ -9,7 +9,7 @@
                     删除
                 </ion-option-button>
             </ion-item>
-            <ion-item class="item-remove-animate item-icon-right" ng-repeat="data in datelist track by $index" ng-if="data.remainDays<0" type="item-text-wrap" href="" style="margin-bottom: 20px">
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="data in datelist track by $index" ng-if="data.remainDays<0" type="item-text-wrap" href="#/tab/dash/dateCounter/{{$index}}" style="margin-bottom: 20px">
                 <span style="float: left">距离{{data.title}}已经</span>
                 <span class="pastNum">{{-data.remainDays}}</span>
                 <span class="pastDays">天</span>

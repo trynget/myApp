@@ -69,3 +69,8 @@
     width: 100px;
     text-align: center;
 }
+
+.dateCounter_detail {
+    background: transparent url("../img/bg.png") no-repeat scroll right center;
+
+}
