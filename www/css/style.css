@@ -74,3 +74,41 @@
     background: transparent url("../img/bg.png") no-repeat scroll right center;
 
 }
+.feature {
+    width: 300px;
+    margin:200px auto;
+    text-align: center;
+    box-shadow: 2px 9px 22px -13px;
+}
+.featureHeader {
+    background-color: #387EF5;
+    height: 35px;
+    line-height: 35px;
+    color: #ffffff;
+    font-size: 25px;
+    border-radius: 10px 10px 0 0;
+}
+.featureHeaderPast {
+    background-color: #EE952A;
+    height: 35px;
+    line-height: 35px;
+    color: #ffffff;
+    font-size: 25px;
+    border-radius: 10px 10px 0 0;
+}
+.featureBody {
+    background-color: #F9F9F9;
+    height: 200px;
+    line-height: 200px;
+    font-family: fantasy;
+    font-size: 100px;
+}
+.featureFooter {
+    background-color: #f2f2f2;
+    height: 30px;
+    line-height: 30px;
+    color: #777777;
+    font-family: cursive;
+    font-size: 20px;
+    border-radius: 0 0 15px 15px;
+}

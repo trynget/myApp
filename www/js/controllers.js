@@ -192,6 +192,7 @@ angular.module('starter.controllers', [])
         });
 
     })
+    //时间提醒详情控制器
     .controller('DateCounterDetailCtrl',function($scope, $rootScope, $stateParams) {
         $scope.dataDetail = $rootScope.datelist[$stateParams.dataId];
         console.log($scope.dataDetail);

@@ -1,5 +1,27 @@
 <ion-view view-title="{{dataDetail.title}}">
     <ion-content class="dateCounter_detail">
+        <div class="feature" ng-if="dataDetail.remainDays>=0">
+            <div class="featureHeader">
+                距离 {{dataDetail.title}} 还有
+            </div>
+            <div class="featureBody">
+                {{dataDetail.remainDays}}
+            </div>
+            <div class="featureFooter">
+                {{dataDetail.date}}
+            </div>
+        </div>
 
+        <div class="feature" ng-if="dataDetail.remainDays<0">
+            <div class="featureHeaderPast">
+                距离 {{dataDetail.title}} 已经
+            </div>
+            <div class="featureBody">
+                {{-dataDetail.remainDays}}
+            </div>
+            <div class="featureFooter">
+                {{dataDetail.date}}
+            </div>
+        </div>
     </ion-content>
 </ion-view>
