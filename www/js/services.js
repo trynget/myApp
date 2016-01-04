@@ -50,6 +50,27 @@ angular.module('starter.services', [])
   };
 })
 
+    .service('dateCounter',function() {
+        var dateList = [{
+            title: "春节放假",
+            date: "2016-2-4"
+        },{
+            title: "元旦放假回来",
+            date: "2016-1-3"
+        }];
+        return {
+            all: function() {
+                return dateList;
+            },
+            remove: function(date) {
+                dateList.splice(dateList.indexOf(date),1);
+            },
+            add: function(date) {
+                dateList.push(date);
+            }
+        }
+    })
+
 .service('todoList', function ($q) {
         var _db;
         var _data;
