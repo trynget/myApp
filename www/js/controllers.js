@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+    //首页面板控制器
 .controller('DashCtrl', function($scope, $ionicModal, $state, $rootScope) {
         $ionicModal.fromTemplateUrl("account.html", {
             scope: $scope,
@@ -47,6 +48,7 @@ angular.module('starter.controllers', [])
         };
     })
 
+    //待办事项控制器
 .controller('TodoCtrl', function($scope, $ionicModal, showMsgService, todoList) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -114,23 +116,25 @@ angular.module('starter.controllers', [])
             $scope.modal.remove();
         });
 })
+
+    //通知控制器
     .controller('InformCtrl', function($scope, Chats) {
         $scope.chats = Chats.all();
         $scope.remove = function(chat) {
             Chats.remove(chat);
         };
     })
-
+//通知详情控制器
 .controller('InformDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+    //设置页控制器
 .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+
 })
 
+    //课表控制器
 .controller('ScheduleCtrl',function($scope) {
     $scope.items = [{
         content: "15-16学年1201班级课表" ,
@@ -169,10 +173,12 @@ angular.module('starter.controllers', [])
         history.back();
     }
 })
+
+    //分享控制器
     .controller('ShareCtrl',function($scope, $rootScope) {
         console.log($rootScope.shares)
     })
-
+    //分享详情控制器
     .controller('ShareDetailCtrl',function($scope, $stateParams,$rootScope) {
         $scope.share = $rootScope.shares[$stateParams.shareId];
     })
@@ -232,6 +238,7 @@ angular.module('starter.controllers', [])
         console.log($scope.dataDetail);
     })
 
+    //笔记控制器
     .controller('NoteCtrl',function($scope, $ionicModal, $rootScope, showMsgService, noteList) {
     noteList.getAllItems().then(function(data) {
         $scope.notes = data;
