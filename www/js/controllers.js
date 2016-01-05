@@ -1,7 +1,9 @@
 angular.module('starter.controllers', [])
 
     //首页面板控制器
-.controller('DashCtrl', function($scope, $ionicModal, $state, $rootScope) {
+.controller('DashCtrl', function($scope, $ionicModal, $state, $rootScope, showMsgService) {
+        $rootScope.isRegister = 0;
+        $scope.student = {};
         $ionicModal.fromTemplateUrl("account.html", {
             scope: $scope,
             animation: "slide-in-up"
@@ -18,6 +20,22 @@ angular.module('starter.controllers', [])
         $scope.$on("$destroy", function() {
             $scope.modal.remove();
         });
+
+        $scope.registerStudent = function() {
+            var account = $scope.student.account;
+            var password = $scope.student.password;
+            if(!account || !password) {
+                showMsgService.showMsg("请正确输入账号密码")
+            }else {
+                console.log(account,password);
+                $rootScope.isRegister = 1;
+                $scope.studentName = "朱凯南";
+            }
+        };
+        $scope.cancelStudent = function() {
+            $scope.student = {};
+            $scope.modal.hide();
+        };
 
         $scope.showInforms = function() {
             $state.go('tab.dash-inform');
@@ -130,8 +148,14 @@ angular.module('starter.controllers', [])
 })
 
     //设置页控制器
-.controller('AccountCtrl', function($scope) {
-
+.controller('AccountCtrl', function($scope, $state, $rootScope, showMsgService) {
+        $scope.toAboutUs = function() {
+            $state.go('tab.account-aboutus');
+        };
+        $scope.exitApp = function() {
+            $rootScope.isRegister = 0;
+            showMsgService.showMsg("登出成功！");
+        }
 })
 
     //课表控制器

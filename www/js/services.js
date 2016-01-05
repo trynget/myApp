@@ -53,7 +53,7 @@ angular.module('starter.services', [])
     .service('dateCounter',function() {
         var dateList = [{
             title: "大创答辩",
-            date: "2016-1-6"
+            date: "2016-1-7"
         },{
             title: "春节放假",
             date: "2016-2-4"
